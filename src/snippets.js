@@ -153,8 +153,8 @@ export const functional_errorBoundry =
       ? <LoginBox /> : <VIPContent /> }
   <ErrorBoundry>;`;
 
-export const errorBoundry_renderProps =
-`class ErrorBoundry extends React.Component {
+export const errorBoundary_renderProps =
+`class ErrorBoundary extends React.Component {
   state = { error: null };
 
   componentDidCatch(error) {
