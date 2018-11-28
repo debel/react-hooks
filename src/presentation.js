@@ -30,7 +30,7 @@ import {
   componentHookExpression,
   seen_classState,
   seen_hookState,
-  errorBoundry_hook,
+  errorBoundary_hook,
   dynamicContext_hook,
   functional_errorBoundry,
   errorBoundry_renderProps,
@@ -179,7 +179,7 @@ export default class Presentation extends React.Component {
           <Heading caps size={4}>Still missing</Heading>
           <Text>hook that allows functional components to
             handle errors in their sub-trees </Text>
-          <CodePane lang="js" theme="external" source={errorBoundry_hook} />
+          <CodePane lang="js" theme="external" source={errorBoundary_hook} />
           <CodePane lang="js" theme="external" source={vipContent_usingAuth} />
         </Slide>
 
