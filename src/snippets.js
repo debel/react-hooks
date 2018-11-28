@@ -220,7 +220,7 @@ export const hook_side_effects =
 `function MyComponent(props) {
   useEffect(() => {
     window.title = \`Hello \${props.userName}\`;
-    () => { window.title = 'No user selected'; }
+    return () => { window.title = 'No user selected'; }
   });
   // ...
 }`;

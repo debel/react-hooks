@@ -6,6 +6,7 @@ import {
   CodePane,
   Deck,
   Heading,
+  Image,
   Link,
   List,
   ListItem,
@@ -31,6 +32,8 @@ import {
   seen_hookState,
   errorBoundry_hook,
   dynamicContext_hook,
+  functional_errorBoundry,
+  errorBoundry_renderProps,
   vipContent_usingAuth,
   method_side_effects,
   hook_side_effects,
@@ -162,6 +165,10 @@ export default class Presentation extends React.Component {
           <CodePane lang="js" theme="external" source={dynamicContext_hook} />
         </Slide>
 
+        <Slide id="how-it-works">
+          <Heading caps size={4}>How it all works?!</Heading>
+          <Image src="images/vdom-tree.png" />
+        </Slide>
         <Slide id="hooks-all-the-way-down">
           <Text caps>It's</Text>
           <Heading caps size={4}>Hooks</Heading>
@@ -176,6 +183,11 @@ export default class Presentation extends React.Component {
           <CodePane lang="js" theme="external" source={vipContent_usingAuth} />
         </Slide>
 
+        <Slide id="errors-render-prop">
+          <CodePane lang="js" theme="external" source={functional_errorBoundry} />
+          <CodePane lang="js" theme="external" source={errorBoundry_renderProps} />
+        </Slide>
+
         <Slide id="major-drawbacks">
           <Heading caps size={4}>Major drawbacks</Heading>
           <List>
@@ -185,6 +197,7 @@ export default class Presentation extends React.Component {
             <ListItem></ListItem>
           </List>
         </Slide>
+
 
         <Slide id="links">
           <Heading caps size={4}>Links</Heading>
