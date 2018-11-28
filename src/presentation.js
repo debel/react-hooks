@@ -1,31 +1,52 @@
-// Import React
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
-// Import Spectacle Core tags
 import {
   BlockQuote,
   Cite,
+  CodePane,
   Deck,
   Heading,
-  ListItem,
+  Link,
   List,
+  ListItem,
   Quote,
   Slide,
   Text,
 } from 'spectacle';
 
-// Import theme
 import createTheme from 'spectacle/lib/themes/default';
 
-// Require CSS
+import {
+  searchBox_class_string_ref,
+  searchBox_class_callback_ref,
+  searchBox_class_instance_ref,
+  searchBox_func_hook_ref,
+  searchBox_func_custom_hooks,
+  useFocusOnMount_customHook,
+  theme_legacyContext,
+  theme_renderPropsContext,
+  theme_hookContext,
+  componentHookExpression,
+  seen_classState,
+  seen_hookState,
+  errorBoundry_hook,
+  dynamicContext_hook,
+  vipContent_usingAuth,
+  method_side_effects,
+  hook_side_effects,
+  hook_redux
+} from './snippets';
+
 require('normalize.css');
+require('./overrides.css');
+require('prismjs/themes/prism-coy.css');
 
 const theme = createTheme(
   {
-    primary: 'white',
-    secondary: '#1F2022',
-    tertiary: '#03A9FC',
-    quaternary: '#CECECE',
+    primary: '#f0f0f0',
+    secondary: 'black',
+    tertiary: 'black',
+    quaternary: 'black',
   },
   {
     primary: 'Montserrat',
@@ -35,61 +56,158 @@ const theme = createTheme(
 
 export default class Presentation extends React.Component {
   render() {
-    return (
+    return (<React.Fragment>
       <Deck
-        transition={['zoom', 'slide']}
-        transitionDuration={500}
+        transition={['slide']}
+        transitionDuration={150}
         theme={theme}
+        progress="bar"
       >
-        <Slide transition={['zoom']} bgColor="primary">
-          <Heading size={1} fit caps lineHeight={1} textColor="secondary">
-            Spectacle Boilerplate
-          </Heading>
-          <Text margin="10px 0 0" textColor="tertiary" size={1} fit bold>
-            open the presentation/index.js file to get started
+        <Slide id="title">
+          <Heading fit caps>⚛️🎣 (React Hooks)</Heading>
+          <Text style={{textAlign: 'right'}}>
+            Mihail Mikov
+          </Text>
+          <Text style={{textAlign: 'right'}}>
+            @debelbot
           </Text>
         </Slide>
-        <Slide transition={['fade']} bgColor="tertiary">
-          <Heading size={6} textColor="primary" caps>
-            Typography
-          </Heading>
-          <Heading size={1} textColor="secondary">
-            Heading 1
-          </Heading>
-          <Heading size={2} textColor="secondary">
-            Heading 2
-          </Heading>
-          <Heading size={3} textColor="secondary">
-            Heading 3
-          </Heading>
-          <Heading size={4} textColor="secondary">
-            Heading 4
-          </Heading>
-          <Heading size={5} textColor="secondary">
-            Heading 5
-          </Heading>
-          <Text size={6} textColor="secondary">
-            Standard text
-          </Text>
-        </Slide>
-        <Slide transition={['fade']} bgColor="primary" textColor="tertiary">
-          <Heading size={6} textColor="secondary" caps>
-            Standard List
-          </Heading>
+        <Slide id="evolution">
+          <Heading caps size={4}>The evolution of<br/>React's APIs</Heading>
           <List>
-            <ListItem>Item 1</ListItem>
-            <ListItem>Item 2</ListItem>
-            <ListItem>Item 3</ListItem>
-            <ListItem>Item 4</ListItem>
+            <ListItem>String magic</ListItem>
+            <ListItem>Callbacks</ListItem>
+            <ListItem>Instances</ListItem>
+            <ListItem>Hooks</ListItem>
           </List>
         </Slide>
-        <Slide transition={['fade']} bgColor="secondary" textColor="primary">
-          <BlockQuote>
-            <Quote>Example Quote</Quote>
-            <Cite>Author</Cite>
-          </BlockQuote>
+
+        <Slide id="string-refs">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2015: String refs</Heading>
+          <CodePane lang="js" theme="external" source={searchBox_class_string_ref} />
+        </Slide>
+        <Slide id="callback-refs">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2016: Callback refs</Heading>
+          <CodePane lang="js" theme="external" source={searchBox_class_callback_ref} />
+        </Slide>
+        <Slide id="instance-refs">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2017: Instance refs</Heading>
+          <CodePane lang="js" theme="external" source={searchBox_class_instance_ref} />
+        </Slide>
+        <Slide id="hook-refs">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2018: Hook refs</Heading>
+          <CodePane lang="js" theme="external" source={searchBox_func_hook_ref} />
+        </Slide>
+
+        <Slide id="method-side-effects">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps fit size={4}>2016: Method side-effects</Heading>
+          <CodePane lang="js" theme="external" source={method_side_effects} />
+        </Slide>
+        <Slide id="hook-side-effects">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2018: Hook side-effects</Heading>
+          <CodePane lang="js" theme="external" source={hook_side_effects} />
+        </Slide>
+
+        <Slide id="legacy-context">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2016: Legacy context</Heading>
+          <CodePane lang="js" theme="external" source={theme_legacyContext} />
+        </Slide>
+        <Slide id="render-props-context">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2017: Render props context</Heading>
+          <CodePane lang="js" theme="external" source={theme_renderPropsContext} />
+        </Slide>
+        <Slide id="hooks-context">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2018: Hook context</Heading>
+          <CodePane lang="js" theme="external" source={theme_hookContext} />
+        </Slide>
+
+        <Slide id="class-state">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2016: Class state</Heading>
+          <CodePane lang="js" theme="external" source={seen_classState} />
+        </Slide>
+        <Slide id="hook-state">
+          <Text caps textSize="0.7em">The evolution of React APIs</Text>
+          <Heading caps size={4}>2018: Hook state</Heading>
+          <CodePane lang="js" theme="external" source={seen_hookState} />
+        </Slide>
+
+        <Slide id="hooks-pattern">
+          <Heading caps size={4}>Hooks</Heading>
+          <Text>One pattern to rule them all</Text>
+        </Slide>
+
+        <Slide id="hooks-redux">
+          <Heading caps size={4}>Hook redux</Heading>
+          <CodePane lang="js" theme="external" source={hook_redux} />
+        </Slide>
+
+        <Slide id="custom-hooks">
+          <Heading caps size={4}>Custom hooks</Heading>
+          <CodePane lang="js" theme="external" source={useFocusOnMount_customHook} />
+          <CodePane lang="js" theme="external" source={searchBox_func_custom_hooks} />
+        </Slide>
+
+        <Slide id="dynamic-context-hook">
+          <Heading caps size={4}>Dynamic Context hooks</Heading>
+          <CodePane lang="js" theme="external" source={dynamicContext_hook} />
+        </Slide>
+
+        <Slide id="hooks-all-the-way-down">
+          <Text caps>It's</Text>
+          <Heading caps size={4}>Hooks</Heading>
+          <Text caps>all the way down</Text>
+        </Slide>
+
+        <Slide id="missing-error-hook">
+          <Heading caps size={4}>Still missing</Heading>
+          <Text>hook that allows functional components to
+            handle errors in their sub-trees </Text>
+          <CodePane lang="js" theme="external" source={errorBoundry_hook} />
+          <CodePane lang="js" theme="external" source={vipContent_usingAuth} />
+        </Slide>
+
+        <Slide id="major-drawbacks">
+          <Heading caps size={4}>Major drawbacks</Heading>
+          <List>
+            <ListItem>Implementation drawback: Can't call hooks conditionally</ListItem>
+            <ListItem></ListItem>
+            <ListItem></ListItem>
+            <ListItem></ListItem>
+          </List>
+        </Slide>
+
+        <Slide id="links">
+          <Heading caps size={4}>Links</Heading>
+          <List>
+            <ListItem><Link href="https://reactjs.org/blog/2018/11/27/react-16-roadmap.html">React's roadmap</Link></ListItem>
+            <ListItem><Link href="https://reactjs.org/docs/hooks-intro.html">Intro to hooks</Link></ListItem>
+            <ListItem><Link href="https://reactjs.org/docs/hooks-reference.html">Official docs</Link></ListItem>
+            <ListItem><Link href="https://usehooks.com/">One hook a day</Link></ListItem>
+            <ListItem><Link href="https://www.hooks.guide/">Example hooks</Link></ListItem>
+            <ListItem><Link href="https://github.com/rehooks/awesome-react-hooks">List of resources about hooks</Link></ListItem>
+          </List>
+        </Slide>
+        <Slide id="thanks">
+          <Heading caps>Thank you!<br/>Q&A</Heading>
         </Slide>
       </Deck>
-    );
+    </React.Fragment>);
   }
 }
+
+/*
+  <Slide id="silliy-syntax">
+    <Heading caps size={4}>Expression components</Heading>
+    <CodePane lang="js" theme="external" source={componentHookExpression} />
+  </Slide>
+*/
